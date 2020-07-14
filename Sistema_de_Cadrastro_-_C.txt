@@ -1,0 +1,189 @@
+Trabalho de Algoritmo
+
+Aluno: Diego Leonardo
+Curso: Ciência da Computação (Boa Vista)
+Disciplina: Técnicas de Programação
+Turno: Manhã
+
+namespace Lista
+{
+    class Program
+    {
+        static List<string> nomes = new List<string>();
+        static void Main(string[] args)
+        {
+            int op;
+
+            do
+            {
+                Console.WriteLine("====================================");
+                Console.WriteLine("======= Sistema de Cadastro ========");
+                Console.WriteLine("====================================");
+                Console.WriteLine();
+                Console.WriteLine("Digite o número da opção que deseja: ");
+                Console.WriteLine();
+                Console.WriteLine("1 - Inserir");
+                Console.WriteLine("2 - Alterar");
+                Console.WriteLine("3 - Consultar");
+                Console.WriteLine("4 - Remover");
+                Console.WriteLine("5 - Listar");
+                Console.WriteLine("6 - Sair");
+                Console.WriteLine();
+                op = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+
+                switch (op)
+
+                {
+                    case 1:
+                        Console.Clear(); 
+                        Inserir();
+                        Console.WriteLine();
+                        break;
+
+                    case 2:
+                        Console.Clear();
+                        Alterar();
+                        Console.WriteLine();
+                        break;
+
+                    case 3:
+                        Console.Clear();
+                        Consultar();
+                        Console.WriteLine();
+                        break;
+
+                    case 4:
+                        Console.Clear();
+                        Remover();
+                        Console.WriteLine();
+                        break;
+
+                    case 5:
+
+                        Listar();
+                        Console.WriteLine();
+                        break;
+
+                    case 6:
+                        Console.WriteLine("Obrigado pro utilizar nosso serviço.");
+                        break;
+
+                    default:
+                        break;
+                }
+
+
+            } while (op!=6);
+
+            Console.ReadKey();
+        }
+
+        //Método para Inserir.
+        static void Inserir() 
+        {
+            Console.WriteLine("Digite o Nome: ");
+            nomes.Add(Console.ReadLine());
+            Console.WriteLine("O nome digitado foi adcionado");
+        }
+
+        //Método para Alterar.
+        static void Alterar() 
+        {
+            //Esta em funcionamento, porém, ele esta alterando a posição seguinte.
+            //Ex.: Se selecionar a posição 1 ele altera a 2 e assim por diante.
+            int op3, num;
+            string novoNome;
+
+            Listar();
+            Console.WriteLine();
+            Console.WriteLine("Digite a posição do nome que deseja alterar:");
+            num = int.Parse(Console.ReadLine());
+
+            if (num >= 0 && num <= nomes.Count)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Deseja realizar essa alteração? ");
+                Console.WriteLine("1 - Confirmar");
+                Console.WriteLine("2 - Cancelar");
+                op3 = int.Parse(Console.ReadLine());
+
+                if (op3 == 1)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Digite o novo nome que deseja:");
+                    novoNome = Console.ReadLine();
+
+                    nomes[num] = novoNome;
+                }
+                
+            }
+            else
+            {
+                Console.WriteLine("Não existe nome na posição informada.");
+            }
+        }
+
+        //Método para Consultar.
+        static void Consultar() 
+        {
+            //Esta funcionando, porém ,esta consultando toda a lista, não o nome especifico.  
+            string nome;
+            Console.WriteLine("Informe o nome que deseja consultar:");
+            nome = Console.ReadLine();
+            foreach (string a in nomes)
+            {
+                if (nome == a)
+                {
+                    Console.WriteLine("O nome informado esta na lista.");
+
+                    if (nome != a)
+                    {
+                        Console.WriteLine("O nome informado não esta na lista.");
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine("O nome informado não esta na lista.");
+                }
+            }   
+        }
+
+        //Método para Remover.
+        static void Remover() 
+        {
+            string removerNome;
+            Listar();
+            Console.WriteLine("Digite da maneira correta o nome que deseja remover:");
+            removerNome = Console.ReadLine();
+
+            int op2;
+            Console.WriteLine("Deseja remover o nome?");
+            Console.WriteLine("1 - Confirmar");
+            Console.WriteLine("2 - Cancelar");
+            op2 = int.Parse(Console.ReadLine());
+
+            if (op2 == 1)
+            {
+                nomes.Remove(removerNome);
+                Console.WriteLine("O nome foi removido");
+            }
+
+        }
+
+        //Método para Listar.
+        static void Listar() 
+        {
+            int pos = 0;
+            Console.WriteLine("Lista dos Cadastros");
+            Console.WriteLine();
+            foreach (var listarNomes in nomes)
+            {
+                
+                pos++;
+                Console.WriteLine("{0} - {1}", pos, listarNomes);
+            }
+        }
+    }
+}
