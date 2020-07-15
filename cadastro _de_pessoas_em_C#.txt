@@ -1,0 +1,190 @@
+namespace ListNomes
+{
+    class Program  
+    {
+        static List<string> nomes = new List<string>();
+        static void Main(string[] args)
+        {
+            int opc;
+            do
+            {
+                //menu de metodos
+                Console.WriteLine("Qual operação você deseja fazer ? ");
+                Console.WriteLine("");
+                Console.WriteLine("----------------------------------");
+                Console.WriteLine("1) Inserir Nome");
+                Console.WriteLine("2) Alterar Nome");
+                Console.WriteLine("3) Consultar Nome");
+                Console.WriteLine("4) Remover Nome");
+                Console.WriteLine("5) Listar Nomes");
+                Console.WriteLine("6) Sair ");
+                Console.WriteLine("----------------------------------");
+
+                opc = int.Parse(Console.ReadLine());
+
+                switch (opc)
+                {
+                    case 1:
+                        Inserir();
+                        Console.Clear();
+                        break;
+                    case 2:
+                        Alterar();
+                        Console.Clear();
+                        break;
+                    case 3:
+                        Consultar();
+                        Console.Clear();
+                        break;
+                    case 4:
+                        Remover();
+                        Console.Clear();
+                        break;
+                    case 5:
+                        Listar();
+                        Console.Clear();
+                        break;
+
+                    default:
+                        break;
+                }
+            } while (opc != 0);
+            Console.ReadKey();
+
+        }//metodo de inserir
+        static void Inserir()
+        {
+            string nome;
+            Console.WriteLine("Informe o nome que você deseja inserir: ");
+            nome = Console.ReadLine();
+
+            if (nome.Where(cw => char.IsWhiteSpacenumber(c)).Count() > 0)
+            {
+                Console.Clear();
+                Console.WriteLine("O nome so pode conter letras");
+                Inserir();
+            }
+            else
+            {
+                nomes.Add(nome);
+                Console.Clear();
+                Console.WriteLine("O nome foi inserido na lista");
+            }
+        }//metodo de alterar
+        static void Alterar()
+        {
+            int num;
+            string opc1, Nnome;
+            Console.WriteLine("Digite a posição do nome que deseja alterar");
+            num = int.Parse(Console.ReadLine());
+            if (num >= 0 && num <= nomes.Count - 1)
+            {
+                Console.WriteLine("Deseja alterar o nome " + nomes[num] + "? [s/n]");
+                opc1 = Console.ReadLine();
+                if (opc1 == "s")
+                {
+                    Console.WriteLine("Digite o novo nome: ");
+                    Nnome = Console.ReadLine();
+                    nomes[num] = Nnome;
+                    Console.Clear();
+                    Console.WriteLine("O nome foi alterado");
+                }
+                else
+                {
+                    Console.Clear();
+                    Alterar();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Não existe nenhum nome nesta posição, deseja ver a lista de nomes registrados?[s/n]");
+                opc1 = Console.ReadLine();
+                if (opc1 == "s")
+                {
+                    Listar();
+                    Alterar();
+                }
+                else
+                {
+                    Console.Clear();
+                }
+                }
+
+            }
+        }//metodo de consultar
+        static void Consultar()
+        {
+           Console.WriteLine("Consultar por nome [1]");
+           Console.WriteLine("Consultar por letra [2]");
+           int consul = int.Parse(Console.ReadLine());
+           Console.Clear();
+
+        switch (consul)
+        {
+            case 1:
+                Console.WriteLine("Digite op nome que deseja consultar: ");
+                string nome = Console.ReadLine();
+                int esta = 0
+                foreach (string a in nomes)
+                {
+                    esta++;
+                }
+                {
+                    if (nome == a)
+                    {
+                        Console.WriteLine("O nome " + nome + " esta na lista");
+                    }
+                    else
+                    {
+                        Console.WriteLine("O nome " + nome + "não esta na lista");
+                    }
+                    break;
+                    case 2:
+                Console.WriteLine("Digite  a letra que deseja consultar: ");
+                string letra = Console.ReadLine();
+                foreach(string i in nomes) {
+                    if (i.Contains(letra))
+                    {
+                        Console.WriteLine(nomes.FindIndex(x=> nomes [0] == letra)+i);
+                    }
+                }
+                break;
+            default:
+                Console.Clear();
+                Console.WriteLine("Por favor, insira um numero correspondente a uma opção");
+                Consultar();
+                break;
+                }
+        }
+        }//metodo de remover
+        static void Remover()
+        {
+            string NR;
+            int SN;
+
+            Listar();
+            Console.WriteLine("Qual nome que você deseja excluir ? ");
+            NR = Console.ReadLine();
+
+            Console.WriteLine("Tem certeza que deseja excluir {0}??", NR);
+            Console.WriteLine("1) SIM");
+            Console.WriteLine("2) NÃO");
+            SN = int.Parse(Console.ReadLine());
+
+            if (SN == 1)
+            {
+                nomes.Remove(NR);
+            }
+             
+        }//metodo de listar
+        static void Listar()
+        {
+            int pos = 0;
+            foreach (var listarNomes in nomes)
+            {
+                pos++;
+                Console.WriteLine("{0} - {1}", pos, listarNomes);
+            }
+        }
+    }
+}
